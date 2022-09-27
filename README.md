@@ -1,136 +1,58 @@
-# STTN for Video Inpainting
-![teaser](https://github.com/researchmm/STTN/blob/master/docs/teaser.png?raw=true)
+# ViTransPAD video transoformer for face anti-spoofing 
 
-### [Paper](https://arxiv.org/abs/2007.10247) | [Demo](https://www.youtube.com/watch?v=tgiWGdr1SnE&feature=youtu.be) | [Video](https://drive.google.com/file/d/19eKm4AJhIbJAbvXyA-HTQHFdia7XcN6H/view?usp=sharing) | [Slides](https://drive.google.com/file/d/1y09-SLcTadqpuDDLSzFdtr3ymGbjrmyi/view?usp=sharing) |[BibTex](https://github.com/researchmm/STTN#citation)
+### [Paper ICIP2022](https://arxiv.org/pdf/2203.01562.pdf) | [Code](https://github.com/hengxyz/ViTransPAD/edit/main/README.md) | [Poster](https://drive.google.com/file/d/1P-xVT7uSp-SIu2yvRvfYiq3T0Pkqc9j4/view?usp=sharing) | [Slides](https://drive.google.com/file/d/1kS81q4-msA5JGNFv983QS0nEuBTeDJkm/view?usp=sharing) 
 
-Learning Joint Spatial-Temporal Transformations for Video Inpainting<br>
-
-[Yanhong Zeng](https://sites.google.com/view/1900zyh),  [Jianlong Fu](https://jianlong-fu.github.io/), and [Hongyang Chao](https://scholar.google.com/citations?user=qnbpG6gAAAAJ&hl).<br>
-In ECCV 2020.
+<br>VITRANSPAD: VIDEO TRANSFORMER USING CONVOLUTION AND SELF-ATTENTION FOR FACE PRESENTATION ATTACK DETECTION <br>
 
 
 <!-- ---------------------------------------------- -->
 ## Citation
 If any part of our paper and repository is helpful to your work, please generously cite with:
 ```
-@inproceedings{yan2020sttn,
-  author = {Zeng, Yanhong and Fu, Jianlong and Chao, Hongyang,
-  title = {Learning Joint Spatial-Temporal
-Transformations for Video Inpainting},
-  booktitle = {The Proceedings of the European Conference on Computer Vision (ECCV)},
-  year = {2020}
+@article{ming2022vitranspad,
+  title={ViTransPAD: Video Transformer using convolution and self-attention for Face Presentation Attack Detection},
+  author={Ming, Zuheng and Yu, Zitong and Al-Ghadi, Musab and Visani, Muriel and MuzzamilLuqman, Muhammad and Burie, Jean-Christophe},
+  journal={arXiv preprint arXiv:2203.01562},
+  year={2022}
+}
 }
 ```
 
 <!-- ---------------------------------------------- -->
 ## Introduction 
-High-quality video inpainting that completes missing regions in video frames is a promising yet challenging task. 
+Face Presentation Attack Detection (PAD) is an important measure to prevent spoof attacks for face biometric systems.
+Many works based on Convolution Neural Networks (CNNs) for face PAD formulate the problem as an image-level binary
+classification task without considering the context. Alternatively, Vision Transformers (ViT) using self-attention to
+attend the context of an image become the mainstreams in face PAD. Inspired by ViT, we propose a Video-based Transformer for face PAD (ViTransPAD) with short/long-range spatio-temporal attention which can not only focus on local details with short attention within a frame but also capture
+long-range dependencies over frames. Instead of using coarse image patches with single-scale as in ViT, we propose the
+Multi-scale Multi-Head Self-Attention (MsMHSA) architecture to accommodate multi-scale patch partitions of Q, K, V
+feature maps to the heads of transformer in a coarse-to-fine manner, which enables to learn a fine-grained representation
+to perform pixel-level discrimination for face PAD. Due to lack inductive biases of convolutions in pure transformers,
+we also introduce convolutions to the proposed ViTransPAD to integrate the desirable properties of CNNs by using convolution patch embedding and convolution projection. The extensive experiments show the effectiveness of our proposed ViTransPAD with a preferable accuracy-computation
+balance, which can serve as a new backbone for face PAD 
+![Long-short attention](https://github.com/figs/fig3_videoattention_cropped.jpg?raw=true)
 
-In this paper, we propose to learn a joint Spatial-Temporal Transformer Network (STTN) for video inpainting. Specifically, we simultaneously fill missing regions in all input frames by the proposed multi-scale patch-based attention modules. STTN is optimized by a spatial-temporal adversarial loss. 
-
-To show the superiority of the proposed model, we conduct both quantitative and qualitative evaluations by using standard stationary masks and more realistic moving object masks.
-
-![STTN](https://github.com/researchmm/STTN/blob/master/docs/sttn.png?raw=true)
-
-
-<!-- ---------------------------------------------- -->
-## Installation  
-
-Clone this repo.
-
-```
-git clone git@github.com:researchmm/STTN.git
-cd STTN/
-```
-
-We build our project based on Pytorch and Python. For the full set of required Python packages, we suggest create a Conda environment from the provided YAML, e.g.
-
-```
-conda env create -f environment.yml 
-conda activate sttn
-```
-
-<!-- ---------------------------------------------- -->
-## Completing Videos Using Pretrained Model
-
-The result videos can be generated using pretrained models. 
-For your reference, we provide a model pretrained on Youtube-VOS([Google Drive Folder](https://drive.google.com/file/d/1ZAMV8547wmZylKRt5qR_tC5VlosXD4Wv/view?usp=sharing)). 
-
-1. Download the pretrained models from the [Google Drive Folder](https://drive.google.com/file/d/1ZAMV8547wmZylKRt5qR_tC5VlosXD4Wv/view?usp=sharing), save it in ```checkpoints/```. 
-
-2. Complete videos using the pretrained model. For example, 
-
-```
-python test.py --video examples/schoolgirls_orig.mp4 --mask examples/schoolgirls  --ckpt checkpoints/sttn.pth 
-```
-The outputs videos are saved at ```examples/```. 
+## Architecture: Multiscale Self-attetion CNN-Transformer 
+![Long-short attention](https://github.com/figs/fig1_architecture_multiSA.jpg?raw=true)
 
 
-<!-- ---------------------------------------------- -->
-## Dataset Preparation
-
-We provide dataset split in ```datasets/```. 
-
-**Preparing Youtube-VOS (2018) Dataset.** The dataset can be downloaded from [here](https://competitions.codalab.org/competitions/19544#participate-get-data). In particular, we follow the standard train/validation/test split (3,471/474/508). The dataset should be arranged in the same directory structure as 
-
-```
-datasets
-    ｜- youtube-vos
-        |- JPEGImages
-           |- <video_id>.zip
-           |- <video_id>.zip
-        |- test.json 
-        |- train.json 
-``` 
-
-**Preparing DAVIS (2018) Dataset.** The dataset can be downloaded from [here](https://davischallenge.org/davis2017/code.html). In particular, there are 90 videos with densely-annotated object masks and 60 videos without annotations. The dataset should be arranged in the same directory structure as
-
-```
-datasets
-    ｜- davis
-        |- JPEGImages
-          |- cows.zip
-          |- goat.zip
-        |- Annoatations
-          |- cows.zip
-          |- goat.zip
-        |- test.json 
-        |- train.json 
-``` 
-
-
-<!-- ---------------------------------------------- -->
-## Training New Models
-Once the dataset is ready, new models can be trained with the following commands. For example, 
-
-```
-python train.py --config configs/youtube-vos.json --model sttn 
-```
-
-<!-- ---------------------------------------------- -->
-## Testing
-
-Testing is similar to [Completing Videos Using Pretrained Model](https://github.com/researchmm/STTN#completing-videos-using-pretrained-model).
-
-```
-python test.py --video examples/schoolgirls_orig.mp4 --mask examples/schoolgirls  --ckpt checkpoints/sttn.pth 
-```
-The outputs videos are saved at ```examples/```. 
-
-<!-- ---------------------------------------------- -->
 ## Visualization 
+The attention map of Liveness and Attack frames in the video. The video-based attention map is more coherent to the image-wise transformer (such as Vit).  
+![Long-short attention](https://github.com/figs/visualisation.jpg?raw=true)
+ 
 
-We provide an example of visualization attention maps in ```visualization.ipynb```. 
-
-
-<!-- ---------------------------------------------- -->
-## Training Monitoring  
-
-We provide traning monitoring on losses by running: 
-```
-tensorboard --logdir release_mode                                                    
-```
 
 <!-- ---------------------------------------------- -->
-## Contact
-If you have any questions or suggestions about this paper, feel free to contact me (zengyh7@mail2.sysu.edu.cn).
+## Configuration & Training
+Configutions for the parameters of the model: 
+```
+./configs/                                                
+```
+
+
+Training the model by running: 
+```
+./train.py -c configs/OuluNPU.json                                                   
+```
+
+<!-- ---------------------------------------------- -->
