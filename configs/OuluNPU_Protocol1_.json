@@ -1,0 +1,60 @@
+{
+    "data_loader": {
+        "w": 224,
+        "h": 224,
+        "sample_length": 40,
+        "Transformer_layers": 6,
+        "Transformer_heads": [0,1],
+        "patchsize":[28,14],
+        "#patchsize":[7,14,28,56,112],
+        "model": "sttn_Efficientnet",
+        "#Transformer output's shape should be same as input emebedding (dimension/channel, size) enabling the following concatenation x+att(x)": "",
+        "channel": 80
+    },
+    "train": {
+        "seed": 2020,
+        "data_root": "/data/zming/datasets/Anti-spoof/OuluNPU/Train_files",
+        "save_dir": "/data/zming/models/Depth_antispoof/tmp/",
+        "#modality can include one or two modality for training the model": "",
+        "modality": ["train_protocol1.json"],
+        "train_module": "core.trainer_transformer",
+        "pretrained_model": "/data/zming/models/Depth_antispoof/Transformer_FAS/OuluNPU/ICCASP2022/Ablation/1_CNN_vs_Transformer/Transformer/gen_00220.pth",
+        "#pretrained_model": "",
+        "face_scale": [1.2, 1.5],
+         "losses": {
+            "hole_weight": 1,
+            "valid_weight": 1,
+            "adversarial_weight": 0.01,
+            "GAN_LOSS": "hinge"
+        },
+        "trainer": {
+            "type": "Adam",
+            "beta1": 0,
+            "beta2": 0.99,
+            "lr": 5e-5,
+            "d2glr": 1,
+            "batch_size": 3,
+            "#batch_size": 1,
+            "num_workers": 12,
+            "#num_workers": 1,
+            "verbosity": 2,
+            "log_step": 100,
+            "save_freq": 268,
+            "#valid_freq": 1e4,
+            "valid_freq": 10,
+            "eval_epoch_num": 5,
+            "iterations": 50e4,
+            "niter": 15e4,
+            "niter_steady": 30e4
+        }
+    },
+
+    "test": {
+        "test_data": "/data/zming/datasets/Anti-spoof/OuluNPU/Test_files/test_protocol1.json",
+        "val_data": "/data/zming/datasets/Anti-spoof/OuluNPU/Dev_files/dev_protocol1.json",
+        "ckpt": "/data/zming/models/Depth_antispoof/Transformer_FAS/OuluNPU/ICCASP2022/Ablation/1_CNN_vs_Transformer/CNN_EfficientNet/",
+        "save_dir": "/data/zming/logs/Antispoof/test/tmp1/",
+        "face_scale": 1.3,
+        "test_module": "core.eval_transformer"
+    }
+}

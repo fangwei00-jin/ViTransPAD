@@ -1,0 +1,61 @@
+{
+    "seed": 2020,
+    "save_dir": "/data/zming/logs/Antispoof/test/tmp/",
+    "pretrained_model": "/data/zming/models_l3icalcul04/Depth_antispoof/Transformer_Depth/CASIA/8layers_2heads_length10_sttn_transformer_Efficientnet_NoNormalization/gen_00086.pth",
+    "data_loader": {
+        "name": "REPLAY.json",
+        "data_root": "/data/zming/datasets/Anti-spoof/OCIM/test",
+        "w": 224,
+        "h": 224,
+        "sample_length": 10
+    },
+     "losses": {
+        "hole_weight": 1,
+        "valid_weight": 1,
+        "adversarial_weight": 0.01,
+        "GAN_LOSS": "hinge"
+    },
+    "trainer": {
+        "type": "Adam",
+        "beta1": 0,
+        "beta2": 0.99,
+        "lr": 5e-5,
+        "d2glr": 1,
+        "batch_size": 12,
+        "num_workers": 2,
+        "#num_workers": 1,
+        "verbosity": 2,
+        "log_step": 100,
+        "save_freq": 268,
+        "#valid_freq": 1e4,
+        "valid_freq": 10,
+        "eval_epoch_num": 5,
+        "iterations": 50e4,
+        "niter": 15e4,
+        "niter_steady": 30e4,
+        "Transformer_layers": 8,
+        "Transformer_heads": [0,1],
+        "face_scale": [1.2, 1.5],
+        "model": "sttn_transformer_Efficientnet_generator_MTL_full",
+        "channel": 80
+    },
+    "test": {
+        "test_data": "/data/zming/datasets/Anti-spoof/OCIM/test/REPLAY.json",
+        "val_data": "/data/zming/datasets/Anti-spoof/OCIM/train/file_csv_OCM.json",
+        "model": "sttn_transformer_Efficientnet_generator_MTL_full",
+        "ckpt": "/data/zming/models/Depth_antispoof/tmp1/sttn_transformer_Efficientnet_generator_MTL_full_OCIM_train/",
+        "neighbor_stride": 5,
+        "ref_length": 10,
+        "fps": 24,
+        "Transformer_layers": 8,
+        "Transformer_heads": [0,1],
+        "test_video_sample_interval": 1,
+        "test_frames_sample_interval": 10,
+        "val_videos_num": 50,
+        "test_model": [61,151],
+        "test_model_sample_interval": 5,
+        "gpu": "2",
+        "face_scale": 1.3,
+        "channel": 80
+    }
+}

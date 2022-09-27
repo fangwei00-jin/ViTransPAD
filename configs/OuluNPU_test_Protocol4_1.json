@@ -1,0 +1,60 @@
+{
+    "seed": 2020,
+    "save_dir": "/data/zming/logs/Antispoof/test/tmp1/",
+    "data_loader": {
+        "name": "test_protocol4_3_135_1.json",
+        "data_root": "/data/zming/datasets/Anti-spoof/OuluNPU/Test_files/",
+        "w": 224,
+        "h": 224,
+        "sample_length": 10
+    },
+    "losses": {
+        "hole_weight": 1,
+        "valid_weight": 1,
+        "adversarial_weight": 0.01,
+        "GAN_LOSS": "hinge"
+    },
+    "trainer": {
+        "type": "Adam",
+        "beta1": 0,
+        "beta2": 0.99,
+        "lr": 1e-4,
+        "d2glr": 1,
+        "batch_size": 8,
+        "num_workers": 2,
+        "#num_workers": 1,
+        "verbosity": 2,
+        "log_step": 100,
+        "save_freq": 268,
+        "#valid_freq": 1e4,
+        "valid_freq": 10,
+        "eval_epoch_num": 5,
+        "iterations": 50e4,
+        "niter": 15e4,
+        "niter_steady": 30e4,
+        "Transformer_layers": 1,
+        "Transformer_heads": [0,1],
+        "face_scale": [1.0, 1.2],
+        "model": "sttn_transformer_Efficientnet_GAP",
+        "channel": 80
+    },
+    "test": {
+        "test_data": "/data/zming/datasets/Anti-spoof/OuluNPU/Test_files/test_protocol4_3_135_1.json",
+        "val_data": "/data/zming/datasets/Anti-spoof/OuluNPU/Dev_files/dev_protocol4_12_124_23456.json",
+        "model": "sttn_transformer_Efficientnet_generator_MTL_full",
+        "ckpt": "/data/zming/models_l3icalcul01/Depth_antispoof/Transformer_Depth/OuluNPU_Protocol4/train12_124_23456/8layer_2heads_length10_transformer(Efficientnet)_Pretrained_Generator_MTL/",
+        "neighbor_stride": 5,
+        "ref_length": 10,
+        "fps": 24,
+        "Transformer_layers": 8,
+        "Transformer_heads": [0,1],
+        "test_video_sample_interval": 1,
+        "test_frames_sample_interval": 10,
+        "val_videos_num": 50,
+        "test_model": [1,760],
+        "test_model_sample_interval": 5,
+        "gpu": "3",
+        "face_scale": 1.3,
+        "channel": 80
+    }
+}

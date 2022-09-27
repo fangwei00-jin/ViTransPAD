@@ -1,0 +1,60 @@
+{
+    "seed": 2020,
+    "save_dir": "/data/zming/logs/Antispoof/test/tmp/",
+    "data_loader": {
+        "name": "test_protocol3_type13.json",
+        "data_root": "/data/zming/datasets/SiW/SiW_release/Test",
+        "w": 216,
+        "h": 120,
+        "sample_length":10
+    },
+    "losses": {
+        "hole_weight": 1,
+        "valid_weight": 1,
+        "adversarial_weight": 0.01,
+        "GAN_LOSS": "hinge"
+    },
+    "trainer": {
+        "type": "Adam",
+        "beta1": 0,
+        "beta2": 0.99,
+        "lr": 1e-4,
+        "d2glr": 1,
+        "batch_size": 16,
+        "num_workers": 2,
+        "#num_workers": 1,
+        "verbosity": 2,
+        "log_step": 100,
+        "save_freq": 268,
+        "#valid_freq": 1e4,
+        "valid_freq": 10,
+        "eval_epoch_num": 5,
+        "iterations": 50e4,
+        "niter": 15e4,
+        "niter_steady": 30e4,
+        "Transformer_layers": 1,
+        "Transformer_heads": [0,1],
+        "face_scale": [1.0, 1.2],
+        "model": "sttn_transformer",
+        "channel": 128
+    },
+    "test": {
+        "test_data": "/data/zming/datasets/SiW/SiW_release/Test/test_protocol3_type13.json",
+        "val_data": "/data/zming/datasets/SiW/SiW_release/Train/train_protocol3_type12.json",
+        "model": "sttn_transformer",
+        "ckpt": "/data/zming/models_l3icalcul02/Depth_antispoof/Transformer_Depth/SiW_Protocol3/train12/1layer_2heads_length5_128-gt-spoof-map_tanh_sttntransformer_facescale1.0-1.2_channel128/",
+        "neighbor_stride": 5,
+        "ref_length": 10,
+        "fps": 24,
+        "Transformer_layers": 1,
+        "Transformer_heads": [0,1],
+        "test_video_sample_interval": 50,
+        "test_frames_sample_interval": 10,
+        "val_videos_num": 50,
+        "test_model": [270,420],
+        "test_model_sample_interval": 5,
+        "gpu": "2",
+        "face_scale": 1.0,
+        "channel": 128
+    }
+}
