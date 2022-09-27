@@ -30,7 +30,7 @@ feature maps to the heads of transformer in a coarse-to-fine manner, which enabl
 to perform pixel-level discrimination for face PAD. Due to lack inductive biases of convolutions in pure transformers,
 we also introduce convolutions to the proposed ViTransPAD to integrate the desirable properties of CNNs by using convolution patch embedding and convolution projection. The extensive experiments show the effectiveness of our proposed ViTransPAD with a preferable accuracy-computation
 balance, which can serve as a new backbone for face PAD 
-![Long-short attention](https://github.com/hengxyz/ViTransPAD/blob/main/figs/fig1_architecture_multiSA.jpg)
+![Long-short attention](https://github.com/hengxyz/ViTransPAD/blob/main/figs/fig3_videoattention_cropped.jpg)
 
 ## Architecture: Multiscale Self-attetion CNN-Transformer 
 ![Long-short attention](https://github.com/hengxyz/ViTransPAD/blob/main/figs/fig1_architecture_multiSA.jpg)
