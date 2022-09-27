@@ -1,6 +1,6 @@
 # ViTransPAD video transoformer for face anti-spoofing 
 
-### [Paper ICIP2022](https://arxiv.org/pdf/2203.01562.pdf) | [Code](https://github.com/hengxyz/ViTransPAD/edit/main/README.md) | [Poster](https://drive.google.com/file/d/1P-xVT7uSp-SIu2yvRvfYiq3T0Pkqc9j4/view?usp=sharing) | [Slides](https://drive.google.com/file/d/1kS81q4-msA5JGNFv983QS0nEuBTeDJkm/view?usp=sharing) 
+### [Paper ICIP2022](https://arxiv.org/pdf/2203.01562.pdf) | [Code](https://github.com/hengxyz/ViTransPAD) | [Poster](https://drive.google.com/file/d/1P-xVT7uSp-SIu2yvRvfYiq3T0Pkqc9j4/view?usp=sharing) | [Slides](https://drive.google.com/file/d/1kS81q4-msA5JGNFv983QS0nEuBTeDJkm/view?usp=sharing) 
 
 <br>VITRANSPAD: VIDEO TRANSFORMER USING CONVOLUTION AND SELF-ATTENTION FOR FACE PRESENTATION ATTACK DETECTION <br>
 
